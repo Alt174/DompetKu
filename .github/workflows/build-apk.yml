@@ -30,28 +30,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract project
-        run: unzip -o DompetKu_Native_Project.zip -d .
-      
-      - name: Configure Java and Kotlin JVM target
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path("app/build.gradle.kts")
-          s = p.read_text()
-          marker = "    buildFeatures { compose = true }"
-          config = """    compileOptions {
-                  sourceCompatibility = JavaVersion.VERSION_17
-                  targetCompatibility = JavaVersion.VERSION_17
-              }
-              kotlinOptions {
-                  jvmTarget = "17"
-              }
-
-          """
-          if marker not in s:
-              raise SystemExit("Configuration marker not found")
-          p.write_text(s.replace(marker, config + marker))
-          PY
+        run: unzip -o DompetKu_2.0_Native_Project.zip -d .      
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
