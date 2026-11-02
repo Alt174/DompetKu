@@ -31,6 +31,10 @@ jobs:
 
       - name: Extract project
         run: unzip -o DompetKu_Native_Project.zip -d .
+      
+- name: Align Java compile target with Kotlin
+        run: |
+          sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g' app/build.gradle.kts
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
